@@ -5,6 +5,9 @@ public class Role {
 	private String roleName;
 	private String description;
 
+	public static Role admin = new Role(1,"admin","Admin Role has access to everything");
+	public static Role manager = new Role(2,"manager","Manager Role has access to self and employees");
+	public static Role employee = new Role(3,"employee","Employee Role has access to self only");
 	
 	public Role() {
 		super();

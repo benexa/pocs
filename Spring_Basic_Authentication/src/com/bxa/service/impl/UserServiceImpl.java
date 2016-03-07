@@ -1,4 +1,4 @@
-package com.bxa.service;
+package com.bxa.service.impl;
 
 import java.util.Set;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bxa.dao.UserDao;
 import com.bxa.model.User;
+import com.bxa.service.UserService;
 
 public class UserServiceImpl implements UserService {
 
