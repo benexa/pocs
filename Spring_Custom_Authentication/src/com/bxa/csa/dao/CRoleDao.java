@@ -8,7 +8,7 @@ public interface CRoleDao {
 
 	public CRole save(CRole cRole);
 	public CRole update(CRole cRole);
-	public CRole delete(CRole cRole);
+	public boolean delete(CRole cRole);
 	public CRole get(long id);
 	public Set<CRole> getAll();
 	

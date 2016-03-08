@@ -18,6 +18,13 @@ public class CRole {
 	@ManyToMany
 	Set<CUser> listOfUser; 
 	
+	
+	
+	public CRole() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public CRole(long id, String role, String description) {
 		super();
 		this.id = id;
