@@ -12,23 +12,18 @@ public class TestDataStore {
 	private static Set<User> users = new HashSet<User>();
 	private static Set<Role> roles = new HashSet<Role>();
 	
-	static Role admin = new Role(1,"admin","Admin Role has access to everything");
-	static Role manager = new Role(2,"manager","Manager Role has access to self and employees");
-	static Role employee = new Role(3,"employee","Employee Role has access to self only");
-	
-	
-	static User user1 = new User(1, "admin_user", new HashSet<Role>(Arrays.asList(employee,admin)), "password_admin");
-	static User user2 = new User(2, "manager_user", new HashSet<Role>(Arrays.asList(employee,manager)), "password_manager");
-	static User user3 = new User(3, "employee_user", new HashSet<Role>(Arrays.asList(employee)), "password_employee");
+	static User admin_user = new User(1, "admin_user", new HashSet<Role>(Arrays.asList(Role.employee,Role.admin)), "admin_user");
+	static User manager_user = new User(2, "manager_user", new HashSet<Role>(Arrays.asList(Role.employee,Role.manager)), "manager_user");
+	static User employee_user = new User(3, "employee_user", new HashSet<Role>(Arrays.asList(Role.employee)), "employee_user");
 	
 	static{
-		roles.add(admin);
-		roles.add(manager);
-		roles.add(employee);
+		roles.add(Role.admin);
+		roles.add(Role.manager);
+		roles.add(Role.employee);
 		
-		users.add(user1);
-		users.add(user2);
-		users.add(user3);
+		users.add(admin_user);
+		users.add(manager_user);
+		users.add(employee_user);
 	}
 	
 	public static Set<User> getUsers(){
@@ -41,22 +36,33 @@ public class TestDataStore {
 	
 	public static User getUser(long id){
 		if(id==1)
-			return user1;
+			return admin_user;
 		if(id==2)
-			return user2;
+			return manager_user;
 		if(id==3)
-			return user3;
+			return employee_user;
+		else
+			return null;
+	}
+	
+	public static User getUserByUserName(String username){
+		if(username.equals("admin_user"))
+			return admin_user ;
+		if(username.equals("manager_user"))
+			return manager_user;
+		if(username.equals("employee_user"))
+			return employee_user;
 		else
 			return null;
 	}
 	
 	public static Role getRole(long id){
 		if(id==1)
-			return admin;
+			return Role.admin;
 		if(id==2)
-			return manager;
+			return Role.manager;
 		if(id==3)
-			return employee;
+			return Role.employee;
 		else
 			return null;
 	}

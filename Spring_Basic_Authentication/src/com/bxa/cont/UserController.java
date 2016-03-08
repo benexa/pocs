@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.bxa.service.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/")
 public class UserController {
 	
 	@Autowired
 	UserService userService;
 	
-	@RequestMapping("/all")
+	@RequestMapping
 	public String getUserList(Model model){
 		model.addAttribute("userList", userService.getUserList());
 		return "userList";

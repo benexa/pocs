@@ -6,6 +6,7 @@ org.springframework.security 	spring-security-config 	3.2.1.RELEASE 		Spring Sec
 org.springframework.security 	spring-security-taglibs 3.2.1.RELEASE 		Spring Security JSP tag library
 
 2. configure a filter in the web deployment descriptor (web.xml).
+NOTE: security filter mapping should be the first filter configured in web.xml
 <!-- Spring Security Configuration -->
 <filter>
 <filter-name>springSecurityFilterChain</filter-name>
