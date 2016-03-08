@@ -46,19 +46,22 @@ default-target-url="/contacts" />
 4. add security-context.xml to application context file
 <import resource="classpath:META-INF/spring/security-context.xml"/>
 
-5. To show hide content based on login use <security tags
+5. Create a controller for security
+
+
+6. To show hide content based on login use <security tags
 <sec:authorize access="isAuthenticated()">${labelWelcome}
 	<sec:authentication property="principal.username" />
 	<br/>
 	<a href="${logoutUrl}">${labelLogout}</a>
 </sec:authorize>	
 
-6. To hide show content based on login and role use
+7. To hide show content based on login and role use
 <sec:authorize access="hasRole('ROLE_USER')">
 	<a href="${addContactUrl}"><h3>${menuAddContact}</h3></a>
 </sec:authorize>
 
-7. To show content for Anonymous users, e.g. login form use
+8. To show content for Anonymous users, e.g. login form use
 <sec:authorize access="isAnonymous()">
 
 </sec:authorize>
