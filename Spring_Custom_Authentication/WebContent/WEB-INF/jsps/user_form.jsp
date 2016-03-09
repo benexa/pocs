@@ -14,13 +14,19 @@
 	<s:form modelAttribute="user" action="/Spring_Custom_Authentication/user/create">
 		<s:label path="username">Name</s:label><s:input path="username"/><br/>
 		<s:label path="password">Password</s:label><s:input path="password"/><br/>
-		<%-- <s:select path="listOfRoles" items="${roleList}" itemValue="id" itemLabel="role"/> --%>
 		
-		<s:select path="listOfRoles">
-			<c:forEach items="${roleList}" var="role" varStatus="vs">
-				<s:option path="${role.id}" value="${role.id}" label="${role.role }"/>
-			</c:forEach>			
+		<%-- <s:select path="listOfRoles" items="${roleList}" itemValue="id" itemLabel="role"/> --%>
+		<s:select path="listOfRoles" multiple="true">
+			<c:forEach items="${roleList}" varStatus="vs" var="role">
+				
+				<s:option id="user.listOfRoles[${vs.index}].id" value="${role.id}">${role.role}</s:option>
+				
+			</c:forEach>		
 		</s:select>
+		
+			<%-- <s:checkboxes path="${user.listOfRoles}" items="${roleList}" itemLabel="role" itemValue="id"/> --%>
+		
+		
 		<input type="submit" value="Submit"/>
 	</s:form>	
 </body>

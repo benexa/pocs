@@ -2,10 +2,15 @@ package com.bxa.csa.model;
 
 import java.util.Collection;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,7 +27,9 @@ public class CUser {
 	long id;
 	String username;
 	String password;
-	@ManyToMany(mappedBy="listOfUser")
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="CUSER_ROLE", joinColumns={@JoinColumn(name="USER_ID",nullable=false)},
+						   inverseJoinColumns={@JoinColumn(name="ROLE_ID",nullable=false)})
 	Set<CRole> listOfRoles;
 
 	
@@ -40,7 +47,7 @@ public class CUser {
 	public long getId() {
 		return id;
 	}
-
+ 
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -67,6 +74,40 @@ public class CUser {
 
 	public void setListOfRoles(Set<CRole> listOfRoles) {
 		this.listOfRoles = listOfRoles;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CUser other = (CUser) obj;
+		if (id != other.id)
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
 	}
 	
 }
