@@ -12,9 +12,9 @@
 <body>
 	Username:${user.username}<br/>
 	Password:${user.password}<br/>
-	<c:forEach items="${userRoles}" var="role">
-		Role:${role.role }<br/>
-		Role Description: ${role.description }<br/>
+	<c:forEach items="${userRoles}" var="rol">
+		<%-- Role:${rol.role}<br/> --%>
+		Role Description: ${rol.description }<br/>
 	</c:forEach>
 </body>
 </html>

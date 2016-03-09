@@ -3,9 +3,12 @@ package com.bxa.csa.model;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
@@ -15,10 +18,10 @@ public class CRole {
 	long id;
 	String role;
 	String description;
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="CUSER_ROLE", joinColumns={@JoinColumn(name="ROLE_ID",nullable=false)},
+	   inverseJoinColumns={@JoinColumn(name="USER_ID",nullable=false)})
 	Set<CUser> listOfUser; 
-	
-	
 	
 	public CRole() {
 		super();
@@ -97,5 +100,12 @@ public class CRole {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "CRole [id=" + id + ", role=" + role + ", description=" + description + "]";
+	}
+	
+	
 		
 }

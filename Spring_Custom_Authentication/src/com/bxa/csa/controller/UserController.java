@@ -73,7 +73,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("{id}")
-	public String getUser(@PathVariable("id") long id, ModelMap model){
+	public String getUser(@PathVariable("id") long id, Model model){
 		CUser user = userService.getUserById(id);
 		Set<CRole> roles = userService.getUserRoles(id);
 		

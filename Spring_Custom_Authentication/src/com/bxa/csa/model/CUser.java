@@ -109,5 +109,11 @@ public class CUser {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "CUser [id=" + id + ", username=" + username + ", password=" + password + "]";
+	}
+
 	
 }

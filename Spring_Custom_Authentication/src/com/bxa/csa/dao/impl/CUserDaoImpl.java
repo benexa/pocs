@@ -3,6 +3,7 @@ package com.bxa.csa.dao.impl;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -78,6 +79,10 @@ public class CUserDaoImpl implements CUserDao {
 		CUser user = session.get(CUser.class, id);
 		Query query = session.createQuery("from CRole roles join roles.listOfUser users where users.id = :id");
 		query.setLong("id", id);
+		
+		Criteria crit = session.createCriteria(CRole.class);
+		crit.
+		
 		Set<CRole> roles = new HashSet<CRole>(query.list());
 		tx.commit();
 		session.close();
