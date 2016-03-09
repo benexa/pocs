@@ -2,6 +2,7 @@ package com.bxa.csa.dao;
 
 import java.util.Set;
 
+import com.bxa.csa.model.CRole;
 import com.bxa.csa.model.CUser;
 
 public interface CUserDao {
@@ -9,5 +10,6 @@ public interface CUserDao {
 	public CUser update(CUser cUser);
 	public boolean delete(CUser cUser);
 	public CUser get(long id);
+	public Set<CRole> getUserRoles(long id);
 	public Set<CUser> getAll();
 }

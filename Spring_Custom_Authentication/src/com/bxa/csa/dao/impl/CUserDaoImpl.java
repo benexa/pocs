@@ -3,8 +3,6 @@ package com.bxa.csa.dao.impl;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Id;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bxa.csa.dao.CUserDao;
+import com.bxa.csa.model.CRole;
 import com.bxa.csa.model.CUser;
 
 @Repository("userDao")
@@ -71,5 +70,19 @@ public class CUserDaoImpl implements CUserDao {
 		session.close();
 		return users;
 	}
+
+	@Override
+	public Set<CRole> getUserRoles(long id) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		CUser user = session.get(CUser.class, id);
+		Query query = session.createQuery("from CRole roles join roles.listOfUser users where users.id = :id");
+		query.setLong("id", id);
+		Set<CRole> roles = new HashSet<CRole>(query.list());
+		tx.commit();
+		session.close();
+		return roles;
+	}
+	
 	
 }

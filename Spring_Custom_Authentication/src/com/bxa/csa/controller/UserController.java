@@ -1,20 +1,22 @@
 package com.bxa.csa.controller;
 
 
-import java.beans.PropertyEditorSupport;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.Valid;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bxa.csa.model.CRole;
@@ -67,9 +69,18 @@ public class UserController {
 		}
 		CUser user = userService.createUser(cuser);
 		modelMap.addAttribute("user", user);
-		return "user";
+		return "redirect:/user/"+user.getId();
 	}
 	
-	
+	@RequestMapping("{id}")
+	public String getUser(@PathVariable("id") long id, ModelMap model){
+		CUser user = userService.getUserById(id);
+		Set<CRole> roles = userService.getUserRoles(id);
+		
+		model.addAttribute("user", user);
+		model.addAttribute("userRoles", roles);
+		
+		return "user";
+	}
 
 }

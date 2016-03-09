@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bxa.csa.dao.CUserDao;
+import com.bxa.csa.model.CRole;
 import com.bxa.csa.model.CUser;
 import com.bxa.csa.service.UserService;
 
@@ -39,5 +40,11 @@ public class UserServiceImpl implements UserService{
 	public Set<CUser> getListOfUsers() {
 		return userDao.getAll();
 	}
+
+	@Override
+	public Set<CRole> getUserRoles(long id) {
+		return userDao.getUserRoles(id);
+	}
+	
 	
 }
