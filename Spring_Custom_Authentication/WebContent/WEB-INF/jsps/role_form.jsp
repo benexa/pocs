@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%@include file="common_menu.jsp" %>
 	<s:form modelAttribute="role" action="/Spring_Custom_Authentication/role/create">
 		<s:label path="role">Role</s:label><s:input path="role"/><br/>
 		<s:label path="description">Description</s:label><s:input path="description"/><br/>

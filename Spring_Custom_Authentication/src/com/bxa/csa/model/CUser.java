@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -25,6 +26,7 @@ public class CUser {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	long id;
+	@NaturalId(mutable=false)
 	String username;
 	String password;
 	@ManyToMany(fetch=FetchType.LAZY)

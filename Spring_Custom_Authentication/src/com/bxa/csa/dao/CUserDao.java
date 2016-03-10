@@ -12,4 +12,5 @@ public interface CUserDao {
 	public CUser get(long id);
 	public Set<CRole> getUserRoles(long id);
 	public Set<CUser> getAll();
+	public CUser getByUserName(String username);
 }

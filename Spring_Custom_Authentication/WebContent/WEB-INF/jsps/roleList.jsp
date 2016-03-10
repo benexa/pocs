@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@include file="common_menu.jsp" %>
 	<c:forEach items="${roleList}" var="role">
 		Role:${role.role}
 		Description:${role.description}

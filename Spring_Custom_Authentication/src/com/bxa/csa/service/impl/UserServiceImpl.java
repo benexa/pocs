@@ -45,6 +45,10 @@ public class UserServiceImpl implements UserService{
 	public Set<CRole> getUserRoles(long id) {
 		return userDao.getUserRoles(id);
 	}
-	
-	
+
+	@Override
+	public CUser getUserByUsername(String username) {
+		return userDao.getByUserName(username);
+	}
+		
 }

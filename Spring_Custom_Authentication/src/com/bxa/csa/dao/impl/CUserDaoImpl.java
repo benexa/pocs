@@ -8,6 +8,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -76,18 +78,26 @@ public class CUserDaoImpl implements CUserDao {
 	public Set<CRole> getUserRoles(long id) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		CUser user = session.get(CUser.class, id);
-		Query query = session.createQuery("from CRole roles join roles.listOfUser users where users.id = :id");
-		query.setLong("id", id);
 		
-		Criteria crit = session.createCriteria(CRole.class);
-		crit.
-		
-		Set<CRole> roles = new HashSet<CRole>(query.list());
+		Criteria criteria = session.createCriteria(CRole.class);
+		criteria.createAlias("listOfUser", "user");
+		criteria.add(Restrictions.eq("user.id", id));
+		Set<CRole> roles = new HashSet<CRole>(criteria.list());
+
 		tx.commit();
 		session.close();
 		return roles;
 	}
+
+	@Override
+	public CUser getByUserName(String username) {
+		Session session = sessionFactory.openSession();
+		CUser user = session.bySimpleNaturalId(CUser.class).load(username);
+		session.close();
+		return user;
+	}
+	
+	
 	
 	
 }

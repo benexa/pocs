@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+		<security:http use-expressions="true">
+			<security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
+			<security:form-login/>
+			<!-- <security:logout logout-success-url="/login" /> -->
+			<security:csrf disabled="true"/>
+			<security:logout invalidate-session="true" logout-success-url="/login" logout-url="/logout" />
+		</security:http>
+		
+		<!-- 
+			JDBC service
+			Will validate against the database using standard Spring security framework
+		 -->
+		<!-- <security:authentication-manager>
+	        <security:authentication-provider> 
+	        <security:jdbc-user-service data-source-ref="datasource" 
+	        				   users-by-username-query="select username,password, true from cuser where username=?" 
+	        				   authorities-by-username-query="select usr.username, role.role from crole role, cuser_role user_role, cuser usr where role.id = user_role.role_id and usr.id = user_role.user_id and usr.username=?" />
+	        </security:authentication-provider>
+	    </security:authentication-manager> -->
+	    <!-- JDBC service ends here-->
+	    
+		
+		<!-- custom authentication
+			 will validate using custom security class com.bxa.csa.security.Custom_Authentication_Provider created by implementing AuthenticationProvider interface 
+		 -->
+		<security:authentication-manager>
+	        <security:authentication-provider ref="customAuthenticationProvider"> 
+	        </security:authentication-provider>
+	    </security:authentication-manager>
+	    
+	    <bean id="customAuthenticationProvider" class="com.bxa.csa.security.Custom_Authentication_Provider">
+	    </bean>
+		<!-- custom authentication ends here -->
+
+
+		<!-- basic authentication -->
+		<!-- <security:authentication-manager>
+	        <security:authentication-provider > 
+	            <security:user-service>
+	                <security:user name="bill"  password="bill"  authorities="ROLE_USER" />
+	                <security:user name="admin" password="admin" authorities="ROLE_ADMIN" />
+	                <security:user name="dba"   password="dba" authorities="ROLE_ADMIN,ROLE_DBA" />
+	            </security:user-service>
+	        </security:authentication-provider>
+	    </security:authentication-manager> -->
+	    <!-- basic authentication ends here-->
+</beans>
