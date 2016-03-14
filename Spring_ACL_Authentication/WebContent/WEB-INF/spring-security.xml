@@ -8,7 +8,8 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 		<security:http use-expressions="true">
-			<security:intercept-url pattern="/*" access="hasRole('ROLE_ADMIN')" />
+			<security:intercept-url pattern="/*" access="hasRole('ROLE_EMP')" />
+			<!-- <security:intercept-url pattern="/role/form" access="hasRole('ROLE_ADMIN')" /> -->
 			<security:form-login/>
 			<!-- <security:logout logout-success-url="/login" /> -->
 			<security:csrf disabled="true"/>
@@ -32,25 +33,25 @@
 		<!-- custom authentication
 			 will validate using custom security class com.bxa.csa.security.Custom_Authentication_Provider created by implementing AuthenticationProvider interface 
 		 -->
-		<security:authentication-manager>
+		<!-- <security:authentication-manager>
 	        <security:authentication-provider ref="customAuthenticationProvider"> 
 	        </security:authentication-provider>
 	    </security:authentication-manager>
 	    
 	    <bean id="customAuthenticationProvider" class="com.bxa.csa.security.Custom_Authentication_Provider">
-	    </bean>
+	    </bean> -->
 		<!-- custom authentication ends here -->
 
 
 		<!-- basic authentication -->
-		<!-- <security:authentication-manager>
-	        <security:authentication-provider > 
-	            <security:user-service>
-	                <security:user name="bill"  password="bill"  authorities="ROLE_USER" />
-	                <security:user name="admin" password="admin" authorities="ROLE_ADMIN" />
-	                <security:user name="dba"   password="dba" authorities="ROLE_ADMIN,ROLE_DBA" />
-	            </security:user-service>
-	        </security:authentication-provider>
-	    </security:authentication-manager> -->
+		<security:authentication-manager>
+	        <security:authentication-provider user-service-ref="userService"/>
+	    </security:authentication-manager>
+	    
+	    <security:user-service id="userService">
+             <security:user name="bill"  password="bill"  authorities="ROLE_EMP" />
+             <security:user name="admin" password="admin" authorities="ROLE_ADMIN" />
+             <security:user name="mgr"   password="mgr" authorities="ROLE_MANAGER" />
+        </security:user-service>
 	    <!-- basic authentication ends here-->
 </beans>
