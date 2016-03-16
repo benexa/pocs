@@ -1,5 +1,7 @@
 package com.lsam.cont;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,13 +21,16 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/create")
-	public String createProductForm(@ModelAttribute("product")Product product, 
+	public String createProductForm(@ModelAttribute("product") @Valid Product product, 
 									BindingResult results,
 									Model model){
+		
+		model.addAttribute("product", product);
+		
 		if(results.hasErrors()){
-			model.addAttribute("product", product);
 			return "productForm";
 		}
+		
 		return "product";
 	}
 }

@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<s:form modelAttribute="product" action="SpringLangSupp/product/create"> 
+	<s:form modelAttribute="product" action="/SpringLangSupp/product/create"> 
 		<s:label path="id" ><sc:message code="product.id.label"/> </s:label><s:input path="id"/><s:errors path="id"></s:errors><br/>
 		<s:label path="name"><sc:message code="product.name.label"/></s:label><s:input path="name"/><s:errors path="name"></s:errors><br/>
 		<s:label path="description"><sc:message code="product.description.label"/></s:label><s:input path="description"/><s:errors path="description"></s:errors><br/>
