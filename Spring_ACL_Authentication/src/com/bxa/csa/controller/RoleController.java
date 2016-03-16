@@ -13,7 +13,7 @@ import com.bxa.csa.model.CRole;
 import com.bxa.csa.service.RoleService;
 
 @Controller
-@RequestMapping("/role")
+@RequestMapping("/admin/role")
 public class RoleController {
 	
 	@Autowired
@@ -29,7 +29,7 @@ public class RoleController {
 	public String createNewRole(@ModelAttribute("role")CRole role, ModelMap modelMap){
 		CRole newrole = roleService.createRole(role);
 		modelMap.addAttribute("role", newrole);
-		return "redirect:/role/all";
+		return "redirect:/admin/role/all";
 	}
 	
 	@RequestMapping("/all")

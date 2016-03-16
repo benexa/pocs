@@ -30,9 +30,11 @@
  
  <!-- Declare an acl service -->
  <bean class="org.springframework.security.acls.jdbc.JdbcMutableAclService" id="aclService">
-  <constructor-arg ref="datasource"/>
+  		<constructor-arg ref="datasource"/>
         <constructor-arg ref="lookupStrategy"/>
         <constructor-arg ref="aclCache"/>
+        <property name="classIdentityQuery" value="select currval(pg_get_serial_sequence('acl_class', 'id'))"/>
+        <property name="sidIdentityQuery" value="select currval(pg_get_serial_sequence('acl_sid', 'id'))"/>
  </bean>
  
  <!-- Declare an audit logger-->
@@ -96,5 +98,7 @@
 	         </value>
 	     </property>
 	 </bean>    
+
+	<bean id="userAclHandler" class="com.bxa.csa.security.acl.UserAclHandler"></bean>
 
 </beans>

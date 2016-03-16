@@ -17,7 +17,8 @@ NOTE: security filter mapping should be the first filter configured in web.xml
 <url-pattern>/*</url-pattern>
 </filter-mapping>
 
-3. The next step is to define the Spring Security context security-context.xml, which will be imported by the root WebApplicationContext configuration file. 
+3. The next step is to define the Spring Security context security-context.xml, 
+which will be imported by the root WebApplicationContext configuration file. 
 
 SAMPLE
 <?xml version="1.0" encoding="UTF-8"?>

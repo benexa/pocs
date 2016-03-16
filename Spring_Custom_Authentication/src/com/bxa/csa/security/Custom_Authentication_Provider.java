@@ -34,7 +34,6 @@ public class Custom_Authentication_Provider implements AuthenticationProvider{
 		// Determine username
 		String username = (authentication.getPrincipal() == null) ? "NONE_PROVIDED"	: authentication.getName();
 
-		boolean cacheWasUsed = true;
 		CUser user = userService.getUserByUsername(username);
 
 		if (user == null) {

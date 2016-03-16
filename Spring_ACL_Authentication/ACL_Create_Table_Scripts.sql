@@ -1,4 +1,4 @@
-﻿--Scripts taken from spring docs https://docs.spring.io/spring-security/site/docs/3.0.x/reference/appendix-schema.html
+--Scripts taken from spring docs https://docs.spring.io/spring-security/site/docs/3.0.x/reference/appendix-schema.html
 
 create table acl_sid(
   id bigserial not null primary key,

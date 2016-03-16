@@ -12,7 +12,7 @@
 </head>
 <body>
 	<%@include file="common_menu.jsp" %>
-	<s:form modelAttribute="user" action="/Spring_ACL_Authentication/user/create">
+	<s:form modelAttribute="user" action="/Spring_ACL_Authentication/admin/user/create">
 		<s:label path="username">Name</s:label><s:input path="username"/><br/>
 		<s:label path="password">Password</s:label><s:input path="password"/><br/>
 		

@@ -21,11 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bxa.csa.model.CRole;
 import com.bxa.csa.model.CUser;
+import com.bxa.csa.security.acl.UserAclHandler;
 import com.bxa.csa.service.RoleService;
 import com.bxa.csa.service.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping
 public class UserController {
 	
 	@Autowired
@@ -50,7 +51,7 @@ public class UserController {
         });
 	}
 	
-	@RequestMapping("/form")
+	@RequestMapping("/admin/user/form")
 	public String getUserForm(ModelMap modelMap){
 		
 		Set<CRole> allRoles = roleService.getListOfRoles();
@@ -62,17 +63,18 @@ public class UserController {
 	} 
 	
 	
-	@RequestMapping("/create")
+	@RequestMapping("/admin/user/create")
 	public String createNewUser(@ModelAttribute("user") @Valid CUser cuser, BindingResult result, ModelMap modelMap){
 		if(result.hasErrors()){
 			System.out.println(result);
 		}
 		CUser user = userService.createUser(cuser);
+		
 		modelMap.addAttribute("user", user);
 		return "redirect:/user/"+user.getId();
 	}
 	
-	@RequestMapping("{id}")
+	@RequestMapping(value={"/admin/user/{id}","user/{id}"})
 	public String getUser(@PathVariable("id") long id, Model model){
 		CUser user = userService.getUserById(id);
 		Set<CRole> roles = userService.getUserRoles(id);
